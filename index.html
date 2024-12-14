@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="customerApp" ng-controller="customerCtrl">
+    <h2>Customer Profile</h2>
+
+    <!-- Customer Form -->
+    <form ng-submit="saveCustomer()">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" ng-model="customer.first_name" required>
+        <br><br>
+        
+        <label for="last_name">Last Name:</label>
+        <input type="text" id="last_name" ng-model="customer.last_name" required>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" ng-model="customer.email" required>
+        <br><br>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" ng-model="customer.phone_number">
+        <br><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" ng-model="customer.address"></textarea>
+        <br><br>
+
+        <button type="submit">Save</button>
+    </form>
+
+    <!-- List of Customers -->
+    <h3>Customer List</h3>
+    <ul>
+        <li ng-repeat="customer in customers">
+            {{ customer.first_name }} {{ customer.last_name }} - {{ customer.email }}
+            <button ng-click="editCustomer(customer)">Edit</button>
+            <button ng-click="deleteCustomer(customer.id)">Delete</button>
+        </li>
+    </ul>
+
+    <!-- Validation Messages -->
+    <div ng-show="errorMessage" style="color: red;">
+        {{ errorMessage }}
+    </div>
+</body>
+</html>
